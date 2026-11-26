@@ -1224,7 +1224,18 @@ function drawCard(){
   { c.save(); const gg = c.createLinearGradient(0, 430, 0, 470); gg.addColorStop(0,'#FFE3A1'); gg.addColorStop(1,'#B78029'); c.fillStyle = gg; c.font = '600 42px "Cormorant Garamond", serif'; try{ c.letterSpacing = '13px'; }catch(e){} c.fillText('UMA ETERNIDADE FELIZ', 546, 470); c.restore(); try{ c.letterSpacing = '0px'; }catch(e){} }
   // nome do convidado em destaque
   let y = 580;
-  if(n){ c.fillStyle = '#E8BA59'; c.font = 'italic 600 78px "Cormorant Garamond", serif'; const t = n.length > 18 ? n.slice(0, 18) + '…' : n; c.fillText(t + ',', 540, y); y += 70; }
+  if(n){   // nome inteiro: diminui a fonte até ~70% e, se ainda não couber, quebra em duas linhas
+    c.fillStyle = '#E8BA59'; const full = n + ',', maxW = 920, F = s => 'italic 600 ' + s + 'px "Cormorant Garamond", serif';
+    let fs = 78; c.font = F(fs);
+    while(c.measureText(full).width > maxW && fs > 56){ fs -= 2; c.font = F(fs); }
+    const ws = full.split(' ');
+    if(c.measureText(full).width <= maxW || ws.length < 2){ c.fillText(full, 540, y); y += 70; }
+    else {
+      let a = full, b = '', best = 1e9;
+      for(let k = 1; k < ws.length; k++){ const p = ws.slice(0,k).join(' '), q = ws.slice(k).join(' '), w = Math.max(c.measureText(p).width, c.measureText(q).width); if(w < best){ best = w; a = p; b = q; } }
+      c.fillText(a, 540, y); c.fillText(b, 540, y + Math.round(fs*.95)); y += 70 + Math.round(fs*.95);
+    }
+  }
   c.fillStyle = '#FFF5E3'; c.font = 'italic 500 58px "Cormorant Garamond", serif'; c.fillText(n ? 'você é nosso convidado' : 'Você é nosso convidado', 540, y);
   // data e local num selo
   const dt = quando.toUpperCase().replace('-FEIRA',''), lc = EVENTO.localCurto || EVENTO.local;
