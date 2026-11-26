@@ -1145,8 +1145,8 @@ const base = (location.origin && location.origin !== 'null' ? location.origin + 
 const pNome = $('#pNome');
 const nome = () => pNome.value.trim();
 const linkPara = n => base + (n ? '?para=' + encodeURIComponent(n) : '');
-const msg = n => (n ? n + ', você' : 'Você') + ' é meu convidado para a CELEBRAI — Cantata de Natal! ✨\n'
-  + quando + ', no ' + (EVENTO.localCurto || EVENTO.local) + '. Classificação livre.\nAbra o seu convite: ' + linkPara(n);
+const msg = n => (n ? n + ', você' : 'Você') + ' é meu convidado para a CELEBRAI — Cantata de Natal! ✨\n\n'
+  + quando.charAt(0).toUpperCase() + quando.slice(1) + ', no ' + (EVENTO.localCurto || EVENTO.local) + '. Classificação livre.\n\nAbra o seu convite e veja uma prévia: ' + linkPara(n);
 const ok = t => { $('#okmsg').textContent = t; };
 let drawT = 0;
 const upd = () => { const w = $('#wa'); if(w) w.href = 'https://wa.me/?text=' + encodeURIComponent(msg(nome())); clearTimeout(drawT); drawT = setTimeout(() => { drawStory(); drawCard(); }, 120); };
