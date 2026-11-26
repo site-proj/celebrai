@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CELEBRAI · Cantata de Natal 2026 · Uma Eternidade Feliz</title>
-<meta name="description" content="Cantata de Natal CELEBRAI — Uma Eternidade Feliz. Sábado, 19 de dezembro de 2026, às 20h, no Renascer Hall (Sede Internacional, Mooca, São Paulo). Classificação livre.">
+<meta name="description" content="Cantata de Natal CELEBRAI — Uma Eternidade Feliz. Sábado, 19 de dezembro de 2026, às 20h, no Renascer Hall Sede Internacional (Mooca, São Paulo). Classificação livre.">
 <meta name="theme-color" content="#07182D">
 <link rel="icon" type="image/png" sizes="48x48" href="img/icone-48.png">
 <link rel="apple-touch-icon" href="img/icone-180.png">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="CELEBRAI · Cantata de Natal 2026">
-<meta property="og:description" content="Uma Eternidade Feliz. 19 de dezembro, 20h, Renascer Hall (Mooca, SP). Você é nosso convidado.">
+<meta property="og:description" content="Uma Eternidade Feliz. 19 de dezembro, 20h, Renascer Hall Sede Internacional (Mooca, SP). Você é nosso convidado.">
 <meta property="og:url" content="https://site-proj.github.io/celebrai/">
 <meta property="og:image" content="https://site-proj.github.io/celebrai/img/og.jpg">
 <meta property="og:image:width" content="1200">
@@ -1026,8 +1026,8 @@ const EVENTO = {
   titulo: 'CELEBRAI — Cantata de Natal',
   inicio: '2026-12-19T20:00:00-03:00',
   duracaoMin: 120,                        // duração estimada — ajuste se souber
-  local: 'Renascer Hall — Sede Internacional, Mooca, São Paulo - SP',
-  localCurto: 'Renascer Hall · Mooca, SP',
+  local: 'Renascer Hall Sede Internacional, Mooca, São Paulo - SP',
+  localCurto: 'Renascer Hall Sede Internacional · Mooca, SP',
   mapa: 'Renascer Hall Sede Internacional Mooca São Paulo',
   classificacao: 'Livre',
   descricao: 'Cantata de Natal 2026 — CELEBRAI: Uma Eternidade Feliz. Teatro, música, dança e coral.',
@@ -1228,11 +1228,13 @@ function drawCard(){
   c.fillStyle = '#FFF5E3'; c.font = 'italic 500 58px "Cormorant Garamond", serif'; c.fillText(n ? 'você é nosso convidado' : 'Você é nosso convidado', 540, y);
   // data e local num selo
   const dt = quando.toUpperCase().replace('-FEIRA',''), lc = EVENTO.localCurto || EVENTO.local;
-  c.font = '600 36px Outfit, sans-serif'; const bw = Math.max(c.measureText(dt).width, 520) + 90, by = y + 50;
+  c.font = '400 30px Outfit, sans-serif'; const lw = c.measureText(lc).width;
+  c.font = '600 36px Outfit, sans-serif'; const bw = Math.max(c.measureText(dt).width, lw, 520) + 90, by = y + 50;
   c.fillStyle = 'rgba(7,24,45,.72)'; c.strokeStyle = 'rgba(232,186,89,.65)'; c.lineWidth = 2.5;
   c.beginPath(); c.roundRect ? c.roundRect((W-bw)/2, by, bw, 150, 75) : c.rect((W-bw)/2, by, bw, 150); c.fill(); c.stroke();
   c.fillStyle = '#E8BA59'; c.fillText(dt, 540, by + 64);
-  c.fillStyle = '#FFF5E3'; c.font = '400 30px Outfit, sans-serif'; c.fillText(lc + ' · Livre', 540, by + 112);
+  c.fillStyle = '#FFF5E3'; c.font = '400 30px Outfit, sans-serif'; c.fillText(lc, 540, by + 112);
+  c.fillStyle = 'rgba(255,245,227,.7)'; c.font = '400 26px Outfit, sans-serif'; c.fillText('Classificação livre', 540, by + 196);
   // endereço do site (se o WhatsApp descartar o texto, o link continua na arte)
   c.fillStyle = 'rgba(7,24,45,.75)'; c.fillRect(0, H - 92, W, 92);
   c.fillStyle = '#FFE3A1'; c.font = '500 30px Outfit, sans-serif'; c.fillText('Abra o seu convite: ' + siteCurto, 540, H - 36);
